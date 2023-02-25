@@ -1,10 +1,13 @@
 package com.dynatheia.heset.Authentication.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jdk.jfr.Name;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity(name = "User")
 @Table(
-        name = "user",
+        name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(name = "user_email_unique", columnNames = "email")
         }
@@ -13,13 +16,12 @@ public class User {
 
     @Id
     @SequenceGenerator(
-            name = "user_seq",
-            sequenceName = "user_seq",
-            allocationSize = 1
+            name = "user_uuid",
+            sequenceName = "user_uuid"
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_seq"
+            strategy = GenerationType.TABLE,
+            generator = "user_uuid"
     )
     @Column(
             name = "id",
@@ -46,6 +48,7 @@ public class User {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @Email
     private String email;
 
     @Column(
@@ -53,6 +56,7 @@ public class User {
             nullable = false
 
     )
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     private Integer age;
 
     public User(Long id,
@@ -61,6 +65,13 @@ public class User {
                 String email,
                 Integer age) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+    }
+
+    public User(String firstName, String lastName, String email, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
