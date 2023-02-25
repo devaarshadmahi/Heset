@@ -3,6 +3,7 @@ package com.dynatheia.heset.Authentication.user;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jdk.jfr.Name;
+import lombok.*;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity(name = "User")
@@ -12,6 +13,13 @@ import org.springframework.format.annotation.NumberFormat;
                 @UniqueConstraint(name = "user_email_unique", columnNames = "email")
         }
 )
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@ToString
+//@Getter
+//@Setter
+@AllArgsConstructor
+@Data
 public class User {
 
     @Id
@@ -59,77 +67,10 @@ public class User {
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     private Integer age;
 
-    public User(Long id,
-                String firstName,
-                String lastName,
-                String email,
-                Integer age) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-    }
-
     public User(String firstName, String lastName, String email, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
-    }
-
-    public User() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
     }
 }
