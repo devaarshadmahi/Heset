@@ -1,12 +1,11 @@
 package com.dynatheia.heset.Authentication.service;
 
-import com.dynatheia.heset.Authentication.repository.UserRespository;
+import com.dynatheia.heset.Authentication.user.UserRespository;
 import com.dynatheia.heset.Authentication.user.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -19,5 +18,9 @@ public class UserConfig {
             User two = new User( "aal", "m", "he@gmail.com", 14);
             userRespository.saveAll(List.of(one, two));
         };
+
+
     }
+
+
 }

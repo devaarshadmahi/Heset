@@ -1,10 +1,18 @@
 package com.dynatheia.heset.Authentication.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 import jdk.jfr.Name;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+
+import java.sql.Date;
 
 @Entity(name = "User")
 @Table(
@@ -19,7 +27,9 @@ import org.springframework.format.annotation.NumberFormat;
 //@Getter
 //@Setter
 @AllArgsConstructor
-@Data
+@NoArgsConstructor
+@Getter@Setter
+@EqualsAndHashCode
 public class User {
 
     @Id
@@ -42,6 +52,7 @@ public class User {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NotNull
     private String firstName;
 
     @Column(
@@ -49,6 +60,7 @@ public class User {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NotNull
     private String lastName;
 
     @Column(
@@ -57,17 +69,34 @@ public class User {
             columnDefinition = "TEXT"
     )
     @Email
+    @NotNull
     private String email;
 
     @Column(
             name = "age",
+            columnDefinition = "",
             nullable = false
 
     )
     @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @NotNull
     private Integer age;
 
-    public User(String firstName, String lastName, String email, Integer age) {
+
+    //    @Column(
+//            name = "creation_date",
+//            nullable = false
+//
+//    )
+//    @NotNull
+//    @CreationTimestamp
+//    //    @PastOrPresent
+//    private Date accountCreated;
+
+    public User(@JsonProperty("first_name") String firstName,
+                @JsonProperty("last_name")String lastName,
+                @JsonProperty("email")String email,
+                @JsonProperty("age")Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
