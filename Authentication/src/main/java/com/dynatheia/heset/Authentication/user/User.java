@@ -2,37 +2,73 @@ package com.dynatheia.heset.Authentication.user;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
+@Entity(name = "User")
+@Table(
+        name = "user",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "user_email_unique", columnNames = "email")
+        }
+)
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "user_seq",
+            sequenceName = "user_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_seq"
+    )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
-//    @Column(name = "email")
+
+    @Column(
+            name = "first_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String firstName;
+
+    @Column(
+            name = "last_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String lastName;
+
+    @Column(
+            name = "email",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String email;
-//    @Column(name = "password")
-    private String password;
-//    @Column(name = "firstname")
-    private String firstname;
-//    @Column(name = "lastname")
-    private String lastname;
 
-    public User(Long id, String email, String password, String firstname, String lastname) {
+    @Column(
+            name = "age",
+            nullable = false
+
+    )
+    private Integer age;
+
+    public User(Long id,
+                String firstName,
+                String lastName,
+                String email,
+                Integer age) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
-
-    public User(String email, String password, String firstname, String lastname) {
-        this.email = email;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.age = age;
     }
 
     public User() {
+
     }
 
     public Long getId() {
@@ -43,6 +79,22 @@ public class User {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -51,38 +103,22 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", age=" + age +
                 '}';
     }
 }
