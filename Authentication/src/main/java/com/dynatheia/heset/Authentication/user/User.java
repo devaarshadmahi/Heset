@@ -26,6 +26,7 @@ import java.sql.Date;
 //@ToString
 //@Getter
 //@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter@Setter
@@ -76,22 +77,19 @@ public class User {
             name = "age",
             columnDefinition = "",
             nullable = false
-
     )
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @NotNull
     private Integer age;
 
 
-    //    @Column(
-//            name = "creation_date",
-//            nullable = false
-//
-//    )
-//    @NotNull
-//    @CreationTimestamp
-//    //    @PastOrPresent
-//    private Date accountCreated;
+    @Column(
+            name = "creation_date",
+            nullable = false
+    )
+    @CreationTimestamp
+    //@PastOrPresent
+    private Date accountCreated;
 
     public User(@JsonProperty("first_name") String firstName,
                 @JsonProperty("last_name")String lastName,
