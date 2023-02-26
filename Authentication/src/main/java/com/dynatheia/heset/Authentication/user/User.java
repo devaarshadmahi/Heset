@@ -91,13 +91,22 @@ public class User {
     //@PastOrPresent
     private Date accountCreated;
 
-    public User(@JsonProperty("first_name") String firstName,
-                @JsonProperty("last_name")String lastName,
-                @JsonProperty("email")String email,
-                @JsonProperty("age")Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-    }
+//    public User(@JsonProperty("first_name") String firstName,
+//                @JsonProperty("last_name")String lastName,
+//                @JsonProperty("email")String email,
+//                @JsonProperty("age")Integer age) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.age = age;
+//    }
+public User(String firstName,
+            String lastName,
+            String email,
+            Integer age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.age = age;
+}
 }

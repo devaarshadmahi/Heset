@@ -1,4 +1,4 @@
-package com.dynatheia.heset.Authentication.user;
+package com.dynatheia.heset.Authentication.repository;
 
 import com.dynatheia.heset.Authentication.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
