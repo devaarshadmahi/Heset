@@ -14,8 +14,8 @@ public class UserConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRespository userRespository){
         return args -> {
-            User one = new User( "raph", "g", "hello@gmail.com", new Date().getSeconds());
-            User two = new User( "aal", "m", "he@gmail.com", 14);
+            User one = new User( "raph", "g", "hello@gmail.com","password",  new Date().getSeconds());
+            User two = new User( "aal", "m", "he@gmail.com","pass", 14);
             userRespository.saveAll(List.of(one, two));
         };
 

@@ -11,10 +11,16 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
 
-@Entity(name = "User")
+//@Entity(name = "User")
+@Entity
 @Table(
         name = "users",
         uniqueConstraints = {
@@ -30,8 +36,9 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter@Setter
+@Builder
 @EqualsAndHashCode
-public class User {
+public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -74,6 +81,14 @@ public class User {
     private String email;
 
     @Column(
+            name = "password",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    @NotNull
+    private String password;
+
+    @Column(
             name = "age",
             columnDefinition = "",
             nullable = false
@@ -81,6 +96,15 @@ public class User {
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @NotNull
     private Integer age;
+
+    @Column(
+            name = "role",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
     @Column(
@@ -100,13 +124,49 @@ public class User {
 //        this.email = email;
 //        this.age = age;
 //    }
-public User(String firstName,
-            String lastName,
-            String email,
-            Integer age) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.age = age;
-}
+    public User(String firstName,
+                String lastName,
+                String email,
+                String password,
+                Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }
