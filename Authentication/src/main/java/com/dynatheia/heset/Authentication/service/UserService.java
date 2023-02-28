@@ -1,7 +1,7 @@
 package com.dynatheia.heset.Authentication.service;
 
 import com.dynatheia.heset.Authentication.repository.UserRespository;
-import com.dynatheia.heset.Authentication.user.User;
+import com.dynatheia.heset.Authentication.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.dynatheia.heset.Authentication.repository;
 
-import com.dynatheia.heset.Authentication.user.User;
+import com.dynatheia.heset.Authentication.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

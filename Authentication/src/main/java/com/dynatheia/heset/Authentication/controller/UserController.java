@@ -1,12 +1,12 @@
 package com.dynatheia.heset.Authentication.controller;
 
 import com.dynatheia.heset.Authentication.service.UserService;
-import com.dynatheia.heset.Authentication.user.User;
+import com.dynatheia.heset.Authentication.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/api/user")
+@RequestMapping(value="/api/v1/user")
 public class UserController {
 
     UserService userService;

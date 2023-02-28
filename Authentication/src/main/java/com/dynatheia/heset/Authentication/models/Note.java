@@ -1,9 +1,8 @@
-package com.dynatheia.heset.Authentication.user;
+package com.dynatheia.heset.Authentication.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.*;
 
 

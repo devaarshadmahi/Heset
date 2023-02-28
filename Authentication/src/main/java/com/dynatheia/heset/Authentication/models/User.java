@@ -1,15 +1,10 @@
-package com.dynatheia.heset.Authentication.user;
+package com.dynatheia.heset.Authentication.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.PastOrPresent;
-import jdk.jfr.Name;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -90,19 +85,17 @@ public class User implements UserDetails {
 
     @Column(
             name = "age",
-            columnDefinition = "",
-            nullable = false
+            columnDefinition = ""
     )
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @NotNull
     private Integer age;
 
     @Column(
             name = "role",
-            nullable = false,
             columnDefinition = "TEXT"
     )
-    @NotNull
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -152,21 +145,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
