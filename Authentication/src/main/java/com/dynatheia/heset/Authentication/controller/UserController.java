@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value="/api/user")
 public class UserController {
 
-
     UserService userService;
 
     @Autowired
