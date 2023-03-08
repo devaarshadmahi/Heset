@@ -4,7 +4,7 @@ import com.dynatheia.heset.Authentication.authentication.AuthenticationRequest;
 import com.dynatheia.heset.Authentication.authentication.AuthenticationResponse;
 import com.dynatheia.heset.Authentication.authentication.RegisterRequest;
 import com.dynatheia.heset.Authentication.config.JwtService;
-import com.dynatheia.heset.Authentication.repository.UserRespository;
+import com.dynatheia.heset.Authentication.repository.UserRepository;
 import com.dynatheia.heset.Authentication.models.Role;
 import com.dynatheia.heset.Authentication.models.User;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRespository userRespository;
+    private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -31,7 +31,7 @@ public class AuthenticationService {
                 .password(encoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        userRespository.save(user);
+        userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
 
@@ -48,7 +48,7 @@ public class AuthenticationService {
           )
         );
 
-        var user = userRespository.findUserByEmail(request.getEmail())
+        var user = userRepository.findUserByEmail(request.getEmail())
                 .orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);

@@ -108,6 +108,15 @@ public class User implements UserDetails {
     //@PastOrPresent
     private Date accountCreated;
 
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Note> notes;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Food> food;
+
 //    public User(@JsonProperty("first_name") String firstName,
 //                @JsonProperty("last_name")String lastName,
 //                @JsonProperty("email")String email,
