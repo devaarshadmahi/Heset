@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
-//    Optional<Ingredient> findIngredientByUserId(Long id);
+    Optional<Ingredient> findIngredientById(Long id);
 }

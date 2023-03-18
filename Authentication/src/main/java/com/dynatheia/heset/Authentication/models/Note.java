@@ -26,5 +26,7 @@ public class Note {
 //    @Column(name = "note_id")
     private long id;
     @Column
+    private String title;
+    @Column
     private String note;
 }

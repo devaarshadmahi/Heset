@@ -19,6 +19,6 @@ public class Food {
     private String upc;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_note_id")
+    @JoinColumn(name = "fk_food_id")
     private List<Note> note;
 }

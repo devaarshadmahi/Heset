@@ -5,7 +5,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.util.List;
 
 @Entity
@@ -21,9 +20,9 @@ public class Ingredient {
 
     @Column(columnDefinition = "TEXT")
     private String ingredient;
+
     @Column(nullable = true)
     private boolean isBad;
-
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id")
